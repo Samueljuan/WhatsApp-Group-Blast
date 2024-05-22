@@ -1,4 +1,0 @@
-selenium==4.17.2
-pillow == 10.3.0
-pyinstaller==6.6.0
-pyperclip==1.8.2
