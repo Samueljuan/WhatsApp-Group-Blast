@@ -4,8 +4,10 @@ from tkinter import filedialog
 from tkinter import messagebox
 from PIL import ImageTk, Image
 from selenium.common.exceptions import SessionNotCreatedException
-import send2 as send2
-import send1 as send1
+import picture1 as picture1
+import wording1 as wording1
+import picture2 as picture2
+import wording2 as wording2
 import sys
 import os
 
@@ -40,8 +42,10 @@ csv_lbl_show = tk.Label(frame)
 csv_path = tk.Entry(frame, font=('verdana',16))
 csv_btn_browse = tk.Button(frame, text='Select CSV',bg='grey',font=('verdana',16))
 
-btn_send1 = tk.Button(frame, text='Send Without Poster',bg='grey',font=('verdana',16))
-btn_send2 = tk.Button(frame, text='Send With Poster',bg='grey',font=('verdana',16))
+btn_wording1 = tk.Button(frame, text='text only 1',bg='grey',font=('verdana',16))
+btn_wording2 = tk.Button(frame, text='text only 2',bg='grey',font=('verdana',16))
+btn_picture1 = tk.Button(frame, text='Poster + 1 text',bg='grey',font=('verdana',16))
+btn_picture2 = tk.Button(frame, text='Poster + 2 text',bg='grey',font=('verdana',16))
 
 
 ### Logic
@@ -64,16 +68,30 @@ def SelectCSV():
     csv_path.insert(0,get_csv)
     csv_path=get_csv
 
-def ButtonSend1():
+def Buttonwording1():
     try:
-        send1.Send(csv_path, window)
+        wording1.Send(csv_path, window)
         window.update()
     except SessionNotCreatedException:
         messagebox.showinfo(title="ERROR!", message="Tutup Chrome Sebelumnya!")
 
-def ButtonSend2():
+def Buttonwording2():
     try:
-        send2.Send(csv_path,img_path, window)
+        wording2.Send(csv_path, window)
+        window.update()
+    except SessionNotCreatedException:
+        messagebox.showinfo(title="ERROR!", message="Tutup Chrome Sebelumnya!")
+
+def Buttonpicture1():
+    try:
+        picture1.Send(csv_path,img_path, window)
+        window.update()
+    except SessionNotCreatedException:
+        messagebox.showinfo(title="ERROR!", message="Tutup Chrome Sebelumnya!")
+
+def Buttonpicture2():
+    try:
+        picture2.Send(csv_path,img_path, window)
         window.update()
     except SessionNotCreatedException:
         messagebox.showinfo(title="ERROR!", message="Tutup Chrome Sebelumnya!")
@@ -84,8 +102,10 @@ def ButtonSend2():
 
 pic_btn_browse['command'] = SelectPic
 csv_btn_browse['command'] = SelectCSV
-btn_send1['command'] = ButtonSend1
-btn_send2['command'] = ButtonSend2
+btn_wording1['command'] = Buttonwording1
+btn_picture1['command'] = Buttonpicture1
+btn_wording2['command'] = Buttonwording2
+btn_picture2['command'] = Buttonpicture2
 
 
 frame.pack()
@@ -101,7 +121,9 @@ pic_btn_browse.grid(row=5, column=0, columnspan="2")
 pic_lbl_show.grid(row=6, column=0, columnspan="2")
 
 
-btn_send1.grid(row=7, column=0, columnspan="2", pady=(30,10))
-btn_send2.grid(row=8, column=0, columnspan="2", pady=(0,20))
+btn_wording1.grid(row=7, column=0, columnspan="2", pady=(30,10))
+btn_wording2.grid(row=8, column=0, columnspan="2", pady=(10,10))
+btn_picture1.grid(row=9, column=0, columnspan="2", pady=(30,10))
+btn_picture2.grid(row=10, column=0, columnspan="2", pady=(10,10))
 
 window.mainloop()
